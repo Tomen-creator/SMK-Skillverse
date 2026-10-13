@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a1020">
+  <meta name="description" content="SMK SkillVerse — belajar keterampilan praktis, bangun portofolio, dan persiapkan masa depan sejak masih SMK.">
+  <title>SMK SkillVerse — Skill Kamu, Masa Depan Kamu!</title>
+  <style>
+    :root{
+      --bg:#0a1020; --panel:#101a2d; --panel2:#14223a; --text:#f4f7fb;
+      --muted:#a8b5c9; --cyan:#67f5dc; --violet:#a78bfa; --line:rgba(173,197,224,.16);
+      --radius:22px; --shadow:0 20px 60px rgba(0,0,0,.24); --max:1160px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:90px}
+    body{margin:0;background:radial-gradient(ellipse at 85% 0%,rgba(103,245,220,.08),transparent 32%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    button,input{font:inherit}
+    button,a{ -webkit-tap-highlight-color:transparent}
+    .container{width:min(var(--max),calc(100% - 40px));margin:auto}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--cyan);font-size:.76rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase}
+    .eyebrow:before{content:"";width:24px;height:2px;background:var(--cyan);box-shadow:0 0 12px var(--cyan)}
+    h1,h2,h3,p{margin-top:0}
+    h1,h2,h3{line-height:1.12;letter-spacing:-.035em}
+    h1{font-size:clamp(2.8rem,6.7vw,5.7rem);max-width:850px;margin:18px 0}
+    h2{font-size:clamp(2rem,4vw,3.3rem);margin:12px 0 16px}
+    h3{font-size:1.2rem;margin-bottom:8px}
+    p{color:var(--muted)}
+    .section{padding:92px 0}
+    .section-head{max-width:720px;margin-bottom:38px}
+    .section-head p{font-size:1.05rem;max-width:650px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:1px solid transparent;border-radius:999px;padding:13px 20px;font-weight:800;cursor:pointer;transition:transform .2s,background .2s,border-color .2s}
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{background:var(--cyan);color:#07131d;box-shadow:0 0 28px rgba(103,245,220,.16)}
+    .btn-secondary{border-color:var(--line);background:rgba(255,255,255,.035);color:var(--text)}
+    .btn-small{padding:10px 15px;font-size:.9rem}
+    .topbar{position:sticky;top:0;z-index:20;background:rgba(10,16,32,.82);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+    .nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+    .brand{display:flex;align-items:center;gap:11px;font-weight:900;letter-spacing:-.03em;white-space:nowrap}
+    .brand-mark{display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:var(--cyan);color:#07131d;font-size:1.2rem;box-shadow:0 0 24px rgba(103,245,220,.2)}
+    .brand small{display:block;color:var(--cyan);font-size:.62rem;letter-spacing:.17em;margin-top:-3px}
+    .nav-links{display:flex;align-items:center;gap:24px}
+    .nav-links a{font-size:.9rem;color:#c6d1e1;transition:color .2s}
+    .nav-links a:hover,.nav-links a.active{color:var(--cyan)}
+    .menu-toggle{display:none;border:1px solid var(--line);background:var(--panel);color:white;border-radius:12px;padding:9px 12px}
+    .hero{padding:80px 0 72px;position:relative;overflow:hidden}
+    .hero-grid{display:grid;grid-template-columns:1.08fr .92fr;align-items:center;gap:45px}
+    .hero-copy p{max-width:630px;font-size:1.12rem}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin:28px 0 24px}
+    .microcopy{font-size:.84rem;color:#7f91aa}
+    .hero-art{position:relative;min-height:420px;display:grid;place-items:center}
+    .orbit{position:absolute;border:1px solid rgba(103,245,220,.22);border-radius:50%;transform:rotate(-18deg)}
+    .orbit.one{width:390px;height:290px}.orbit.two{width:300px;height:390px;transform:rotate(34deg);border-color:rgba(167,139,250,.2)}
+    .art-card{position:relative;z-index:1;width:min(100%,410px);padding:28px;border:1px solid rgba(103,245,220,.25);border-radius:28px;background:linear-gradient(145deg,rgba(24,42,67,.96),rgba(12,20,37,.96));box-shadow:var(--shadow),0 0 50px rgba(103,245,220,.07);transform:rotate(-2deg)}
+    .art-top{display:flex;justify-content:space-between;align-items:center;color:#a8b5c9;font-size:.78rem}
+    .status-dot{width:8px;height:8px;display:inline-block;background:var(--cyan);border-radius:50%;box-shadow:0 0 12px var(--cyan);margin-right:6px}
+    .art-title{font-size:1.75rem;font-weight:900;line-height:1.1;margin:26px 0 18px;letter-spacing:-.04em}
+    .art-title span{color:var(--cyan)}
+    .progress-list{display:grid;gap:12px}
+    .progress-row{display:flex;align-items:center;gap:12px;padding:12px;background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:14px}
+    .mini-icon{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:rgba(103,245,220,.1);color:var(--cyan);font-weight:900}
+    .progress-row strong{display:block;font-size:.88rem}.progress-row small{color:var(--muted);font-size:.75rem}
+    .float-tag{position:absolute;z-index:2;padding:12px 16px;border:1px solid var(--line);background:#111d31;border-radius:15px;box-shadow:var(--shadow);font-size:.8rem;font-weight:800}
+    .float-tag.a{top:42px;right:-3px;color:var(--cyan)}.float-tag.b{bottom:35px;left:-8px;color:#d2c4ff}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:32px;max-width:570px}
+    .stat{border-left:2px solid rgba(103,245,220,.6);padding-left:13px}.stat strong{display:block;font-size:1.25rem}.stat span{font-size:.8rem;color:var(--muted)}
+    .soft-section{background:linear-gradient(180deg,rgba(255,255,255,.018),rgba(255,255,255,.01));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .category-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .category{padding:24px;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(145deg,rgba(20,34,58,.8),rgba(13,22,40,.8));transition:transform .2s,border-color .2s}
+    .category:hover{transform:translateY(-4px);border-color:rgba(103,245,220,.5)}
+    .category-icon{width:48px;height:48px;display:grid;place-items:center;border-radius:15px;background:rgba(103,245,220,.1);color:var(--cyan);font-size:1.35rem;margin-bottom:20px}
+    .category p{font-size:.92rem;margin-bottom:0}
+    .category-link{display:inline-flex;margin-top:17px;color:var(--cyan);font-size:.88rem;font-weight:800}
+    .toolbar{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+    .filters{display:flex;gap:8px;flex-wrap:wrap}
+    .filter-btn{border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--muted);padding:9px 14px;cursor:pointer;font-size:.86rem}
+    .filter-btn.active,.filter-btn:hover{background:rgba(103,245,220,.12);border-color:rgba(103,245,220,.45);color:var(--cyan)}
+    .search{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:11px 15px;color:white;min-width:220px;outline:none}
+    .search:focus{border-color:var(--cyan)}
+    .product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .product-card{overflow:hidden;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(180deg,#121f34,#0f192b);display:flex;flex-direction:column;transition:transform .2s,border-color .2s}
+    .product-card:hover{transform:translateY(-5px);border-color:rgba(103,245,220,.4)}
+    .product-cover{min-height:175px;padding:22px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;background:radial-gradient(circle at 85% 10%,rgba(103,245,220,.24),transparent 35%),linear-gradient(135deg,#1b3150,#111a2d)}
+    .product-cover:after{content:"";position:absolute;width:180px;height:180px;border:1px solid rgba(103,245,220,.2);border-radius:50%;right:-55px;bottom:-105px;box-shadow:0 0 0 18px rgba(103,245,220,.025),0 0 0 38px rgba(103,245,220,.02)}
+    .cover-label{font-size:.68rem;letter-spacing:.15em;color:var(--cyan);font-weight:900;text-transform:uppercase;position:relative;z-index:1}
+    .cover-title{font-size:1.65rem;font-weight:950;line-height:1.02;max-width:240px;letter-spacing:-.04em;position:relative;z-index:1}
+    .cover-symbol{position:absolute;right:23px;top:44px;font-size:3.3rem;color:rgba(255,255,255,.18);font-weight:900}
+    .product-body{padding:22px;display:flex;flex-direction:column;flex:1}
+    .product-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}
+    .pill{font-size:.7rem;border-radius:999px;background:rgba(167,139,250,.12);color:#d3c4ff;padding:5px 9px;font-weight:800}
+    .level{font-size:.75rem;color:var(--muted)}
+    .product-body p{font-size:.9rem;flex:1}
+    .product-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:10px}
+    .price{font-weight:900;color:var(--cyan);font-size:1.05rem}
+    .product-foot .btn{padding:10px 13px;font-size:.82rem}
+    .empty-state{display:none;padding:35px;border:1px dashed var(--line);border-radius:18px;text-align:center;color:var(--muted)}
+    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;counter-reset:steps}
+    .step{padding:22px;border:1px solid var(--line);border-radius:var(--radius);background:rgba(255,255,255,.025);counter-increment:steps}
+    .step:before{content:"0" counter(steps);display:block;color:var(--cyan);font-size:1.7rem;font-weight:900;margin-bottom:24px}
+    .step p{font-size:.9rem;margin-bottom:0}
+    .feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center}
+    .feature-panel{padding:30px;border-radius:26px;background:linear-gradient(145deg,#142541,#0f192b);border:1px solid var(--line)}
+    .feature-list{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:15px}
+    .feature-list li{display:flex;gap:12px;color:#d5deeb}.check{color:var(--cyan);font-weight:900}
+    .quote-box{padding:28px;border-left:3px solid var(--cyan);background:rgba(103,245,220,.055);border-radius:0 18px 18px 0}
+    .quote-box p{font-size:1.15rem;color:#e5edf7}
+    .faq-list{display:grid;gap:10px;max-width:850px}
+    details{border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.025);padding:17px 20px}
+    summary{cursor:pointer;font-weight:800;list-style:none;display:flex;justify-content:space-between;gap:12px}
+    summary:after{content:"+";color:var(--cyan);font-size:1.3rem;line-height:1}
+    details[open] summary:after{content:"−"}
+    details p{margin:14px 0 0;font-size:.92rem}
+    .cta{padding:54px;border-radius:30px;border:1px solid rgba(103,245,220,.24);background:radial-gradient(ellipse at 100% 0%,rgba(103,245,220,.13),transparent 40%),linear-gradient(135deg,#14243d,#0f182a);text-align:center;position:relative;overflow:hidden}
+    .cta h2{max-width:760px;margin:14px auto}.cta p{max-width:650px;margin:0 auto 25px}
+    footer{padding:35px 0 25px;border-top:1px solid var(--line)}
+    .footer-main{display:flex;justify-content:space-between;gap:25px;flex-wrap:wrap;padding-bottom:25px}
+    .footer-links{display:flex;gap:18px;flex-wrap:wrap;color:var(--muted);font-size:.88rem}
+    .copyright{font-size:.78rem;color:#72829b;border-top:1px solid var(--line);padding-top:18px}
+    .toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#e8fff9;color:#07131d;padding:12px 18px;border-radius:999px;font-weight:800;box-shadow:var(--shadow);z-index:50;transition:.25s;font-size:.88rem}
+    .toast.show{opacity:1;transform:translate(-50%,0)}
+    .modal-backdrop{position:fixed;inset:0;background:rgba(1,5,14,.78);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px;z-index:40}
+    .modal-backdrop.open{display:flex}
+    .modal{width:min(520px,100%);padding:28px;border:1px solid rgba(103,245,220,.25);border-radius:24px;background:#101a2d;box-shadow:var(--shadow)}
+    .modal-top{display:flex;justify-content:space-between;gap:16px;align-items:start}
+    .close-modal{border:1px solid var(--line);border-radius:10px;background:transparent;color:white;padding:6px 11px;cursor:pointer}
+    .modal-note{font-size:.85rem;border:1px solid var(--line);background:rgba(255,255,255,.03);padding:13px;border-radius:12px}
+    :focus-visible{outline:3px solid var(--cyan);outline-offset:3px}
+    @media(max-width:900px){
+      .hero-grid,.feature-grid{grid-template-columns:1fr}
+      .hero-copy{max-width:800px}.hero-art{min-height:390px}
+      .category-grid,.product-grid{grid-template-columns:repeat(2,1fr)}
+      .steps{grid-template-columns:repeat(2,1fr)}
+      .nav-links{gap:14px}
+    }
+    @media(max-width:680px){
+      .container{width:min(100% - 28px,var(--max))}
+      .section{padding:66px 0}
+      .hero{padding:56px 0 50px}
+      .nav{min-height:68px}
+      .menu-toggle{display:inline-flex}
+      .nav-cta{display:none}
+      .nav-links{display:none;position:absolute;top:68px;left:0;right:0;padding:18px 22px 22px;background:#0d1628;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch}
+      .nav-links.open{display:flex}
+      .nav-links a{padding:8px 0}
+      .hero-art{min-height:350px}
+      .orbit.one{width:300px;height:240px}.orbit.two{width:245px;height:315px}
+      .art-card{padding:21px}.float-tag.a{right:0;top:20px}.float-tag.b{left:0;bottom:12px}
+      .stats{gap:8px}.stat strong{font-size:1.08rem}.stat span{font-size:.72rem}
+      .category-grid,.product-grid,.steps{grid-template-columns:1fr}
+      .category{padding:21px}.product-cover{min-height:160px}
+      .search{width:100%;min-width:0}.toolbar{align-items:stretch}
+      .cta{padding:35px 20px}
+      .footer-main{flex-direction:column}
+    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="#beranda" aria-label="SMK SkillVerse beranda">
+        <span class="brand-mark">✳</span>
+        <span>SMK SKILLVERSE<small>LEARN • CREATE • GROW</small></span>
+      </a>
+      <nav class="nav-links" id="navLinks" aria-label="Navigasi utama">
+        <a href="#beranda">Beranda</a>
+        <a href="#kategori">Jalur Belajar</a>
+        <a href="#produk">Katalog</a>
+        <a href="#cara-kerja">Cara Belajar</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a class="btn btn-primary btn-small nav-cta" href="#produk">Mulai Belajar ↗</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Buka menu navigasi" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="beranda">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Ruang tumbuh siswa SMK</span>
+          <h1>Skill Kamu,<br><span style="color:var(--cyan)">Masa Depan Kamu!</span></h1>
+          <p>Belajar keterampilan praktis, bangun portofolio, dan persiapkan masa depan sejak masih SMK. Mulai dari satu skill, lalu ubah pengetahuan menjadi karya nyata.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#produk">Jelajahi Materi <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-secondary" href="#kategori">Temukan Jalur Belajar</a>
+          </div>
+          <div class="microcopy">Ebook • Worksheet • Template • Panduan proyek</div>
+          <div class="stats" aria-label="Keunggulan platform">
+            <div class="stat"><strong>Praktis</strong><span>Belajar sambil mencoba</span></div>
+            <div class="stat"><strong>Terarah</strong><span>Langkah demi langkah</span></div>
+            <div class="stat"><strong>Berbukti</strong><span>Kumpulkan hasil karya</span></div>
+          </div>
+        </div>
+        <div class="hero-art" aria-label="Ilustrasi dashboard pembelajaran digital">
+          <div class="orbit one"></div><div class="orbit two"></div>
+          <div class="float-tag a">✦ SKILL UP MODE</div>
+          <div class="art-card">
+            <div class="art-top"><span><i class="status-dot"></i>LEARNING DASHBOARD</span><span>01 / 06</span></div>
+            <div class="art-title">Ubah rasa ingin tahu<br>jadi <span>skill nyata.</span></div>
+            <div class="progress-list">
+              <div class="progress-row"><div class="mini-icon">&lt;/&gt;</div><div><strong>Digital Skills</strong><small>Belajar • Eksperimen • Bangun</small></div></div>
+              <div class="progress-row"><div class="mini-icon">▤</div><div><strong>Project & Portfolio</strong><small>Catat proses, tunjukkan hasil</small></div></div>
+              <div class="progress-row"><div class="mini-icon">↗</div><div><strong>Career Ready</strong><small>Siapkan langkah berikutnya</small></div></div>
+            </div>
+          </div>
+          <div class="float-tag b">✧ LEARN TODAY. BUILD TOMORROW.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft-section" id="kategori">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Pilih fokusmu</span>
+          <h2>Belajar skill yang bisa kamu gunakan.</h2>
+          <p>Belajar bukan hanya tentang nilai. Kembangkan kemampuan yang bisa kamu praktikkan untuk tugas sekolah, proyek pribadi, PKL, dan persiapan karier.</p>
+        </div>
+        <div class="category-grid">
+          <article class="category"><div class="category-icon">&lt;/&gt;</div><h3>Digital Skills</h3><p>Kenali coding, teknologi, desain digital, dan cara memecahkan masalah.</p><a class="category-link" href="#produk" data-filter-link="digital">Jelajahi materi ↗</a></article>
+          <article class="category"><div class="category-icon">▤</div><h3>PKL Preparation</h3><p>Persiapkan jurnal, dokumentasi, laporan, dan presentasi PKL dengan lebih teratur.</p><a class="category-link" href="#produk" data-filter-link="pkl">Jelajahi materi ↗</a></article>
+          <article class="category"><div class="category-icon">◎</div><h3>Career Ready</h3><p>Latih kemampuan membuat CV, menyusun portofolio, dan menghadapi wawancara.</p><a class="category-link" href="#produk" data-filter-link="career">Jelajahi materi ↗</a></article>
+          <article class="category"><div class="category-icon">✳</div><h3>Creative Skills</h3><p>Eksplorasi desain grafis, editing video, storytelling, dan pembuatan konten.</p><a class="category-link" href="#produk" data-filter-link="creative">Jelajahi materi ↗</a></article>
+          <article class="category"><div class="category-icon">↗</div><h3>Digital Business</h3><p>Pelajari dasar pemasaran digital, riset ide, dan perencanaan bisnis online.</p><a class="category-link" href="#produk" data-filter-link="business">Jelajahi materi ↗</a></article>
+          <article class="category"><div class="category-icon">▣</div><h3>Portfolio Builder</h3><p>Dokumentasikan proses dan hasil proyek untuk menunjukkan perkembangan skill.</p><a class="category-link" href="#produk" data-filter-link="portfolio">Jelajahi materi ↗</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="produk">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Pustaka skill</span>
+          <h2>Temukan materi untuk langkah berikutnya.</h2>
+          <p>Pilih panduan sesuai tujuanmu. Setiap kartu adalah contoh materi yang bisa dikembangkan menjadi modul, worksheet, atau proyek praktik.</p>
+        </div>
+        <div class="toolbar">
+          <div class="filters" role="group" aria-label="Filter kategori materi">
+            <button class="filter-btn active" data-filter="all">Semua</button>
+            <button class="filter-btn" data-filter="pkl">PKL</button>
+            <button class="filter-btn" data-filter="career">Karier</button>
+            <button class="filter-btn" data-filter="digital">Digital</button>
+            <button class="filter-btn" data-filter="creative">Kreatif</button>
+            <button class="filter-btn" data-filter="business">Bisnis</button>
+            <button class="filter-btn" data-filter="portfolio">Portofolio</button>
+          </div>
+          <input class="search" id="productSearch" type="search" placeholder="Cari materi..." aria-label="Cari materi belajar">
+        </div>
+        <div class="product-grid" id="productGrid">
+          <article class="product-card" data-category="pkl" data-search="pkl jurnal laporan dokumentasi internship">
+            <div class="product-cover"><span class="cover-label">FIELD GUIDE / 01</span><span class="cover-symbol">▤</span><div class="cover-title">PKL<br>STARTER KIT</div></div>
+            <div class="product-body"><div class="product-meta"><span class="pill">PKL Preparation</span><span class="level">Pemula</span></div><h3>PKL Starter Kit</h3><p>Kerangka jurnal harian, checklist kegiatan, struktur laporan, dan dokumentasi PKL.</p><div class="product-foot"><span class="price">Materi contoh</span><button class="btn btn-secondary btn-small detail-btn" data-id="pkl">Lihat detail ↗</button></div></div>
+          </article>
+          <article class="product-card" data-category="career portfolio" data-search="cv resume interview portofolio karier kerja">
+            <div class="product-cover" style="background:radial-gradient(circle at 85% 10%,rgba(167,139,250,.28),transparent 35%),linear-gradient(135deg,#302750,#111a2d)"><span class="cover-label" style="color:#c8b8ff">CAREER LAB / 02</span><span class="cover-symbol">◎</span><div class="cover-title">CV &<br>INTERVIEW</div></div>
+            <div class="product-body"><div class="product-meta"><span class="pill">Career Ready</span><span class="level">Pemula</span></div><h3>CV & Interview Toolkit</h3><p>Kenali struktur CV, susun cerita pengalaman, dan latihan menjawab pertanyaan interview.</p><div class="product-foot"><span class="price">Materi contoh</span><button class="btn btn-secondary btn-small detail-btn" data-id="career">Lihat detail ↗</button></div></div>
+          </article>
+          <article class="product-card" data-category="digital" data-search="coding logika programming teknologi">
+            <div class="product-cover"><span class="cover-label">DIGITAL LAB / 03</span><span class="cover-symbol">&lt;/&gt;</span><div class="cover-title">CODING<br>ADVENTURE</div></div>
+            <div class="product-body"><div class="product-meta"><span class="pill">Digital Skills</span><span class="level">Pemula</span></div><h3>Coding Adventure SMK</h3><p>Mulai dari logika pemrograman dan algoritma sederhana menuju proyek mini pertamamu.</p><div class="product-foot"><span class="price">Materi contoh</span><button class="btn btn-secondary btn-small detail-btn" data-id="coding">Lihat detail ↗</button></div></div>
+          </article>
+          <article class="product-card" data-category="creative" data-search="konten video creator editing media sosial">
+            <div class="product-cover" style="background:radial-gradient(circle at 85% 10%,rgba(255,176,110,.2),transparent 35%),linear-gradient(135deg,#4a2b3c,#111a2d)"><span class="cover-label" style="color:#ffc6a0">CREATOR LAB / 04</span><span class="cover-symbol">▶</span><div class="cover-title">CONTENT<br>CREATOR KIT</div></div>
+            <div class="product-body"><div class="product-meta"><span class="pill">Creative Skills</span><span class="level">Pemula</span></div><h3>Content Creator Starter Pack</h3><p>Worksheet ide, kalender konten, struktur hook, dan checklist produksi video pendek.</p><div class="product-foot"><span class="price">Materi contoh</span><button class="btn btn-secondary btn-small detail-btn" data-id="creator">Lihat detail ↗</button></div></div>
+          </article>
+          <article class="product-card" data-category="business" data-search="bisnis digital marketing riset ide pemasaran">
+            <div class="product-cover" style="background:radial-gradient(circle at 85% 10%,rgba(103,245,220,.18),transparent 35%),linear-gradient(135deg,#183f43,#111a2d)"><span class="cover-label">BUSINESS LAB / 05</span><span class="cover-symbol">↗</span><div class="cover-title">DIGITAL<br>BUSINESS</div></div>
+            <div class="product-body"><div class="product-meta"><span class="pill">Digital Business</span><span class="level">Pemula</span></div><h3>Digital Business Workbook</h3><p>Latihan mengenali audiens, memetakan masalah, dan merancang ide promosi sederhana.</p><div class="product-foot"><span class="price">Materi contoh</span><button class="btn btn-secondary btn-small detail-btn" data-id="business">Lihat detail ↗</button></div></div>
+          </article>
+          <article class="product-card" data-category="portfolio digital creative" data-search="portfolio proyek karya presentasi showcase">
+            <div class="product-cover" style="background:radial-gradient(circle at 85% 10%,rgba(167,139,250,.24),transparent 35%),linear-gradient(135deg,#24345c,#111a2d)"><span class="cover-label" style="color:#c8b8ff">PROJECT LAB / 06</span><span class="cover-symbol">▣</span><div class="cover-title">PORTFOLIO<br>BUILDER</div></div>
+            <div class="product-body"><div class="product-meta"><span class="pill">Portfolio Builder</span><span class="level">Pemula</span></div><h3>Portfolio Builder Workbook</h3><p>Susun tujuan proyek, proses pengerjaan, bukti hasil, dan refleksi skill yang kamu pelajari.</p><div class="product-foot"><span class="price">Materi contoh</span><button class="btn btn-secondary btn-small detail-btn" data-id="portfolio">Lihat detail ↗</button></div></div>
+          </article>
+        </div>
+        <div class="empty-state" id="emptyState">Materi tidak ditemukan. Coba kata kunci atau kategori lain.</div>
+        <p class="microcopy" style="margin-top:18px">Catatan: katalog ini adalah contoh awal untuk platform belajar. Tambahkan materi asli, file unduhan, dan tautan akses sebelum diluncurkan untuk publik.</p>
+      </div>
+    </section>
+
+    <section class="section soft-section" id="cara-kerja">
+      <div class="container">
+        <div class="section-head"><span class="eyebrow">Belajar lewat praktik</span><h2>Dari penasaran menjadi punya karya.</h2><p>Gunakan alur sederhana agar proses belajar terasa jelas dan hasilnya bisa kamu lihat.</p></div>
+        <div class="steps">
+          <article class="step"><h3>Pilih tujuan</h3><p>Tentukan skill yang ingin kamu kembangkan sesuai kebutuhan sekolah atau rencana masa depan.</p></article>
+          <article class="step"><h3>Pelajari panduan</h3><p>Ikuti materi dan pecah proses belajar menjadi langkah kecil yang mudah dikerjakan.</p></article>
+          <article class="step"><h3>Kerjakan proyek</h3><p>Praktikkan materi melalui latihan atau proyek mini yang bisa kamu selesaikan.</p></article>
+          <article class="step"><h3>Dokumentasikan</h3><p>Simpan hasil, catat hal yang dipelajari, dan kumpulkan menjadi portofolio pribadi.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container feature-grid">
+        <div>
+          <span class="eyebrow">Belajar dengan tujuan</span>
+          <h2>Bukan cuma tahu. Saatnya bisa melakukan.</h2>
+          <p>SMK SkillVerse dirancang sebagai ruang belajar praktis yang mendorong siswa untuk mencoba, mengevaluasi, dan menunjukkan hasil kerja.</p>
+          <ul class="feature-list">
+            <li><span class="check">✓</span><span><strong>Langkah yang jelas</strong><br><span style="color:var(--muted)">Materi disusun agar mudah diikuti oleh pemula.</span></span></li>
+            <li><span class="check">✓</span><span><strong>Fokus pada praktik</strong><br><span style="color:var(--muted)">Latihan dan proyek mini membantu mengubah teori menjadi pengalaman.</span></span></li>
+            <li><span class="check">✓</span><span><strong>Portofolio bertahap</strong><br><span style="color:var(--muted)">Simpan progres dan karya untuk menunjukkan kemampuanmu.</span></span></li>
+          </ul>
+        </div>
+        <div class="feature-panel">
+          <div class="quote-box"><p>“Kamu tidak harus menguasai semuanya hari ini. Mulai dari satu skill, lalu terus tingkatkan lewat praktik.”</p><span class="eyebrow">SkillVerse mindset</span></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px">
+            <div class="progress-row"><div class="mini-icon">01</div><div><strong>Explore</strong><small>Temukan minatmu</small></div></div>
+            <div class="progress-row"><div class="mini-icon">02</div><div><strong>Practice</strong><small>Bangun kemampuan</small></div></div>
+            <div class="progress-row"><div class="mini-icon">03</div><div><strong>Create</strong><small>Hasilkan karya</small></div></div>
+            <div class="progress-row"><div class="mini-icon">04</div><div><strong>Grow</strong><small>Catat progresmu</small></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft-section" id="faq">
+      <div class="container">
+        <div class="section-head"><span class="eyebrow">Pertanyaan umum</span><h2>Hal yang perlu kamu tahu.</h2><p>Informasi dasar untuk membantu kamu memulai proses belajar.</p></div>
+        <div class="faq-list">
+          <details><summary>SMK SkillVerse cocok untuk siapa?</summary><p>Platform ini ditujukan untuk siswa SMK yang ingin mengembangkan keterampilan praktis, menyiapkan PKL, mengeksplorasi karier, atau membangun portofolio.</p></details>
+          <details><summary>Apakah saya harus sudah mahir?</summary><p>Tidak. Materi dapat dimulai dari tingkat pemula. Pilih panduan sesuai kebutuhan dan kerjakan latihan secara bertahap.</p></details>
+          <details><summary>Apakah semua materi gratis?</summary><p>Website contoh ini belum mengatur status berbayar atau gratis. Pengelola dapat menetapkan materi gratis, kelas berbayar, atau kombinasi keduanya.</p></details>
+          <details><summary>Bagaimana cara mengakses materi?</summary><p>Setelah materi asli diunggah, tautkan tombol detail ke halaman modul, dokumen online, atau halaman akses yang sesuai.</p></details>
+          <details><summary>Apakah website ini sudah menyimpan progres belajar?</summary><p>Belum. Versi awal ini adalah front-end statis. Akun pengguna, penyimpanan progres, dan dashboard pribadi memerlukan backend atau layanan database tambahan.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="mulai">
+      <div class="container">
+        <div class="cta">
+          <span class="eyebrow">Your future starts with one skill</span>
+          <h2>Mulai bangun masa depanmu!</h2>
+          <p>Kamu tidak harus menunggu lulus untuk mulai mengembangkan keterampilan. Mulai dari satu skill, kerjakan satu proyek, dan kumpulkan hasil karyamu.</p>
+          <a href="#produk" class="btn btn-primary">Pilih Materi Belajar ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-main">
+        <a class="brand" href="#beranda"><span class="brand-mark">✳</span><span>SMK SKILLVERSE<small>LEARN • CREATE • GROW</small></span></a>
+        <div class="footer-links"><a href="#kategori">Jalur Belajar</a><a href="#produk">Materi</a><a href="#faq">FAQ</a><a href="mailto:halo@smkskillverse.example">Kontak</a></div>
+      </div>
+      <div class="copyright">© <span id="year"></span> SMK SkillVerse. Belajar Hari Ini, Berkarya untuk Masa Depan.</div>
+    </div>
+  </footer>
+
+  <div class="modal-backdrop" id="detailModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <div class="modal-top"><div><span class="eyebrow">Detail materi</span><h2 id="modalTitle" style="font-size:1.8rem;margin-top:12px">Nama materi</h2></div><button class="close-modal" id="closeModal" aria-label="Tutup detail">✕</button></div>
+      <p id="modalDescription"></p>
+      <div class="modal-note" id="modalContents"></div>
+      <p class="microcopy" style="margin:15px 0 0">Demo antarmuka: tombol ini belum terhubung ke modul atau sistem akun.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px"><a class="btn btn-primary" href="#cara-kerja" id="modalStart">Lihat cara belajar ↗</a><button class="btn btn-secondary" id="modalDone">Kembali ke katalog</button></div>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const $ = (s, root=document) => root.querySelector(s);
+    const $$ = (s, root=document) => [...root.querySelectorAll(s)];
+
+    // Mobile navigation
+    const menuToggle = $("#menuToggle");
+    const navLinks = $("#navLinks");
+    menuToggle.addEventListener("click", () => {
+      const open = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(open));
+      menuToggle.setAttribute("aria-label", open ? "Tutup menu navigasi" : "Buka menu navigasi");
+      menuToggle.textContent = open ? "✕" : "☰";
+    });
+    $$("#navLinks a").forEach(link => link.addEventListener("click", () => {
+      navLinks.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.textContent = "☰";
+    }));
+
+    // Catalogue filters and search
+    let currentFilter = "all";
+    const searchInput = $("#productSearch");
+    const cards = $$(".product-card");
+    const filterButtons = $$(".filter-btn");
+    function updateProducts(){
+      const query = searchInput.value.trim().toLowerCase();
+      let shown = 0;
+      cards.forEach(card => {
+        const categories = card.dataset.category.split(" ");
+        const haystack = (card.dataset.search + " " + card.innerText).toLowerCase();
+        const matchCategory = currentFilter === "all" || categories.includes(currentFilter);
+        const matchQuery = !query || haystack.includes(query);
+        const visible = matchCategory && matchQuery;
+        card.style.display = visible ? "flex" : "none";
+        if(visible) shown++;
+      });
+      $("#emptyState").style.display = shown ? "none" : "block";
+    }
+    filterButtons.forEach(btn => btn.addEventListener("click", () => {
+      currentFilter = btn.dataset.filter;
+      filterButtons.forEach(b => b.classList.toggle("active", b === btn));
+      updateProducts();
+    }));
+    searchInput.addEventListener("input", updateProducts);
+    $$("[data-filter-link]").forEach(link => link.addEventListener("click", () => {
+      currentFilter = link.dataset.filterLink;
+      filterButtons.forEach(b => b.classList.toggle("active", b.dataset.filter === currentFilter));
+      updateProducts();
+    }));
+
+    // Demo detail modal
+    const materials = {
+      pkl:{title:"PKL Starter Kit",description:"Rencanakan dan dokumentasikan pengalaman PKL dengan alur yang lebih teratur.",contents:"Contoh isi: jurnal harian • checklist kegiatan • kerangka laporan • dokumentasi • panduan presentasi."},
+      career:{title:"CV & Interview Toolkit",description:"Persiapkan diri untuk kesempatan magang, PKL, organisasi, atau pekerjaan pertama.",contents:"Contoh isi: struktur CV • inventarisasi skill • portofolio pemula • latihan pertanyaan • checklist persiapan."},
+      coding:{title:"Coding Adventure SMK",description:"Kenali logika pemrograman melalui latihan dasar dan proyek mini.",contents:"Contoh isi: algoritma • variabel dan kondisi • latihan logika • debugging dasar • proyek mini."},
+      creator:{title:"Content Creator Starter Pack",description:"Rancang ide dan proses produksi konten dengan lebih terstruktur.",contents:"Contoh isi: peta ide • hook • kalender konten • checklist produksi • evaluasi hasil."},
+      business:{title:"Digital Business Workbook",description:"Latih cara memahami audiens dan merancang ide bisnis digital secara sederhana.",contents:"Contoh isi: target audiens • masalah pengguna • ide solusi • perencanaan konten • evaluasi."},
+      portfolio:{title:"Portfolio Builder Workbook",description:"Ubah proyek dan latihan menjadi dokumentasi kemampuan yang mudah dipahami orang lain.",contents:"Contoh isi: tujuan proyek • peran • proses • bukti hasil • hal yang dipelajari."}
+    };
+    const modal = $("#detailModal");
+    function openModal(id){
+      const item = materials[id]; if(!item) return;
+      $("#modalTitle").textContent = item.title;
+      $("#modalDescription").textContent = item.description;
+      $("#modalContents").textContent = item.contents;
+      modal.classList.add("open");
+      $("#closeModal").focus();
+    }
+    function closeModal(){modal.classList.remove("open")}
+    $$(".detail-btn").forEach(btn => btn.addEventListener("click", () => openModal(btn.dataset.id)));
+    $("#closeModal").addEventListener("click", closeModal);
+    $("#modalDone").addEventListener("click", closeModal);
+    $("#modalStart").addEventListener("click", closeModal);
+    modal.addEventListener("click", e => {if(e.target === modal) closeModal()});
+    document.addEventListener("keydown", e => {if(e.key === "Escape") closeModal()});
+
+    $("#year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
